@@ -5,6 +5,7 @@ export type Price = {
 }
 
 export type Company = {
+    id: number,
     ticker: string,
     securityName: string, 
     sector: string, 

@@ -1,56 +1,82 @@
-import { Client } from 'pg';
+import { Pool } from 'pg';
 import { Company } from '../types/company';
 import data from '../data/data.json';
 
 export default class PostGres {
-    init() {
-        const connection = new Client({
-            user: 'postgres',
-            host: 'localhost',
-            database: 'security-db',
-            password: 'postgres',
-            port: 5432,
-        })
+    pool = new Pool({
+        database: 'security-db',
+        user: 'postgres',
+        password: 'postgres',
+        port: 5432,
+        ssl: false,
+        max: 20,
+        idleTimeoutMillis: 1000,
+        connectionTimeoutMillis: 1000,
+        maxUses: 7500,
+    });
 
-        connection.connect(function (err: Error) {
-            if (err) {
-                throw err;
-            }
+    async init() {
+        try {
+            const companies = data as Company[];
+            console.log("Read from file all companies!");
 
+            const connection = await this.pool.connect();
             console.log("Connected to database!");
 
 
-            const companies = data as Company[]
+            connection.query('DROP TABLE IF EXISTS company;' + ' CREATE TABLE company (id serial, ticker varchar(50), securityName varchar(50), sector varchar(50), country varchar(50), trend numeric, prices jsonb);');
+            console.log('Created table company');
 
 
-            console.log("Read from file all companies!")
+            console.log('Filling it with companies');
+            const queryString = `INSERT INTO company (ticker, securityName, sector, country, trend, prices) VALUES` +
+                companies.map((company: Company) => ` ('${company.ticker}', '${company.securityName}', '${company.sector}', '${company.country}', '${company.trend}', '${JSON.stringify(company.prices)}')`).join(',');
 
-            connection.query(
-                'DROP TABLE IF EXISTS company;' + ' CREATE TABLE company (id serial, ticker varchar(50), securityName varchar(50), sector varchar(50), country varchar(50), trend numeric, prices jsonb);',
-                (err) => {
-                    if (err) {
-                        throw err
-                    }
+            const result = await connection.query(queryString);
+            console.log(`Inserted ${result.rowCount} companies`);
 
-                    console.log('Created table company')
-                    console.log('Filling it with company')
+        } catch (error) {
+            console.log('Unable to complete data seed!')
+            throw error;
+        } finally {
+            this.pool.end();
+        }
+    }
 
+    async findCompanies(limit: number, offset: number): Promise<Company[]> {
+        try {
+            const connection = await this.pool.connect();
 
-                    const queryString = `INSERT INTO company (ticker, securityName, sector, country, trend, prices) VALUES` +
-                        companies.map((company: Company) => ` ('${company.ticker}', '${company.securityName}', '${company.sector}', '${company.country}', '${company.trend}', '${JSON.stringify(company.prices)}')`).join(',');
+            const result = await connection.query(`
+                SELECT * FROM company
+                LIMIT ${limit}
+                OFFSET ${offset};
+            `);
 
-                    connection.query(queryString,
-                        (err, result) => {
-                            if (err) {
-                                throw err
-                            }
+            return result.rows;
+        } catch (error) {
+            console.log('Unable to find companies')
+            throw error;
+        } finally {
+            this.pool.end();
+        }
+    }
 
-                            console.log(`Inserted ${result.rowCount} companies`)
-                            connection.end()
-                        }
-                    )
-                }
-            );
-        });
+    async findCompany(id: number): Promise<Company> {
+        try {
+            const connection = await this.pool.connect();
+
+            const result = await connection.query(`
+                SELECT * FROM company
+                WHERE id in(${id});
+            `);
+
+            return result.rows[0];
+        } catch (error) {
+            console.log('Unable to find companies')
+            throw error;
+        } finally {
+            this.pool.end();
+        }
     }
 }
