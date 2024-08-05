@@ -1,22 +1,44 @@
-// server.mjs
-import { createServer } from 'node:http';
-import PostGresDatabase from './database/postgresDatabase';
-import { CompanyService } from './services/companyService';
+import createError from 'http-errors';
+import express, { NextFunction, Request, Response } from 'express';
+import dotenv from 'dotenv';
+import morgan from 'morgan';
+import PostgresDatabase from './database/postgresDatabase';
+import companyRoute from './routes/companyRoute';
 
-const server = createServer(async (req, res) => {
-    res.writeHead(200, { 'Content-Type': 'text/plain' });
-    res.end('Hello World!\n');
 
-    const service = new CompanyService();
-    const comps = await service.getCompanies(5, 2);
-    console.log(comps);
+dotenv.config();
+
+// seed database with data.json
+const pgDB = new PostgresDatabase();
+pgDB.init();
+
+
+const app = express();
+
+// allow json parser
+app.use(express.json());
+
+// allow dev logging
+app.use(morgan('dev'));
+
+// route company path
+app.use('/company', companyRoute);
+
+// catch 404 and forward to error handler
+app.use(function (req: Request, res: Response, next: NextFunction) {
+    next(createError(404));
 });
 
-// starts a simple http server locally on port 3000
-server.listen(3000, 'localhost', () => {
-    console.log('Listening on localhost:3000');
-    const pg = new PostGresDatabase();
-    pg.init();
+// error handler
+app.use(function (err: { message: string, status: number }, req: Request, res: Response) {
+    // set locals, only providing error in development
+    res.locals.message = err.message;
+    res.locals.error = req.app.get('env') === 'development' ? err : {};
+
+    // set error status code
+    res.status(err.status || 500);
 });
 
-// run with `node server.mjs`
+app.listen(process.env.PORT, () => {
+    console.log(`Server is running on http://localhost:${process.env.PORT}`);
+});

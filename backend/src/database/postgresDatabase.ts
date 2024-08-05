@@ -38,8 +38,6 @@ export default class PostgresDatabase {
         } catch (error) {
             console.log('Unable to complete data seed!')
             throw error;
-        } finally {
-            this.pool.end();
         }
     }
 
@@ -57,8 +55,6 @@ export default class PostgresDatabase {
         } catch (error) {
             console.log('Unable to find companies')
             throw error;
-        } finally {
-            this.pool.end();
         }
     }
 
@@ -75,8 +71,6 @@ export default class PostgresDatabase {
         } catch (error) {
             console.log('Unable to find companies')
             throw error;
-        } finally {
-            this.pool.end();
         }
     }
 }

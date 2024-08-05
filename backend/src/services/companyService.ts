@@ -1,7 +1,7 @@
 import PostgresDatabase from "../database/postgresDatabase";
 import { Company } from '../types/company';
 
-export class CompanyService {
+export default class CompanyService {
     postgresDB = new PostgresDatabase();
 
     async getCompanies(pageSize: number, index: number): Promise<Company[]> {
