@@ -2,7 +2,7 @@ import { Pool } from 'pg';
 import { Company } from '../types/company';
 import data from '../data/data.json';
 
-export default class PostGres {
+export default class PostgresDatabase {
     pool = new Pool({
         database: 'security-db',
         user: 'postgres',
