@@ -1,0 +1,34 @@
+tbody tr:nth-child(odd){
+    background-color: whitesmoke;
+}
+
+.listContainer {
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.trendCell {
+    &.blue{
+        background-color: darkblue;
+    }
+    &.red{
+        background-color: darkred;
+    }
+    &.green{
+        background-color: darkgreen;
+    }
+}
+
+.naveContainer {
+    margin: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 100%;
+}
+
+.naveButton {
+    background-color: whitesmoke;
+}

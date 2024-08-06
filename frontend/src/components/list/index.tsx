@@ -3,9 +3,17 @@ import Row from './row';
 import { Company } from '../../types/company';
 import { useLoaderData, useSearchParams } from 'react-router-dom';
 import Nave from './nave';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import { Typography } from '@mui/material';
+
+const tableHeaders = ['Symbol', 'Name', 'Sector', 'Country', 'Trend'];
 
 export default function List(): JSX.Element {
-    const [ searchParams ] = useSearchParams();
+    const [searchParams] = useSearchParams();
     const page = parseInt(searchParams.get('page') || '0');
     const [companies, setCompanies] = useState<Company[]>([]);
     const data = useLoaderData() as Company[];
@@ -15,24 +23,24 @@ export default function List(): JSX.Element {
     }, [page, data]);
 
     return (
-        <>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Symbol</th>
-                        <th>Name</th>
-                        <th>Sector</th>
-                        <th>Country</th>
-                        <th>Trend</th>
-                    </tr>
-                </thead>
-                <tbody>
+        <div className='listContainer'>
+            <Table>
+                <TableHead>
+                    <TableRow>
+                        {tableHeaders.map((header) => (
+                            <TableCell>
+                                <Typography variant="h5">{header}</Typography>
+                            </TableCell>
+                        ))}
+                    </TableRow>
+                </TableHead>
+                <TableBody className='tableBody'>
                     {companies.map((company) => (
                         <Row key={company.ticker} company={company} />
                     ))}
-                </tbody>
-            </table>
+                </TableBody>
+            </Table>
             <Nave page={page} hideNext={false} />
-        </>
+        </div>
     );
 }
