@@ -4,6 +4,12 @@ export type Price = {
     volume: string,
 }
 
+export enum PriceEnum {
+    DATE = 'Date',
+    CLOSE = 'Close',
+    VOLUME = 'Volume'
+}
+
 export type Company = {
     id: number,
     ticker: string,

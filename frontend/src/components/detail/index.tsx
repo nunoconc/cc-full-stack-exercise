@@ -1,9 +1,13 @@
-import { JSX, useEffect, useState } from 'react';
+import { JSX, useEffect, useState, useRef } from 'react';
 import { useLoaderData } from 'react-router-dom';
-import { Company } from '../../types/company';
+import Highcharts from 'highcharts';
+import HighchartsReact from 'highcharts-react-official';
+import { Company, PriceEnum } from '../../types/company';
+import { buildOptions } from './highchartOptions';
 
 export default function Detail(): JSX.Element {
     const [company, setCompany] = useState<Company>();
+    const chartComponentRef = useRef<HighchartsReact.RefObject>(null);
     const data = useLoaderData() as Company;
 
     useEffect(() => {
@@ -18,10 +22,15 @@ export default function Detail(): JSX.Element {
             <p>Sectore: {company?.sector}</p>
             <p>Country: {company?.country}</p>
 
-            <div>
-                <p>..... Chart ....</p>
-                <p>{company?.prices?.[0].volume}</p>
-            </div>
+            {company && (
+                <div>
+                    <HighchartsReact
+                        highcharts={Highcharts}
+                        options={buildOptions(company)}
+                        ref={chartComponentRef}
+                    />
+                </div>
+            )}
         </div>
     );
 }

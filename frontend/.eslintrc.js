@@ -6,7 +6,11 @@ module.exports = {
         es2021: true,
         jest: true,
     },
-    extends: ['eslint:recommended'],
+    extends: [
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:@typescript-eslint/eslint-recommended",
+    ],
     parserOptions: {
         ecmaVersion: 'latest',
         sourceType: 'module',
@@ -17,5 +21,6 @@ module.exports = {
         semi: [2, 'always'],
         'no-use-before-define': 'off',
         '@typescript-eslint/no-use-before-define': ['error'],
+        "no-unused-vars": "warn",
     },
 };
