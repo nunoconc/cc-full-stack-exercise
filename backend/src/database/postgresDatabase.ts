@@ -24,12 +24,12 @@ export default class PostgresDatabase {
             console.log("Connected to database!");
 
 
-            connection.query('DROP TABLE IF EXISTS company;' + ' CREATE TABLE company (id serial, ticker varchar(50), securityName varchar(50), sector varchar(50), country varchar(50), trend numeric, prices jsonb);');
+            connection.query('DROP TABLE IF EXISTS company;' + ' CREATE TABLE company (id serial, ticker varchar(50), "securityName" varchar(50), sector varchar(50), country varchar(50), trend numeric, prices jsonb);');
             console.log('Created table company');
 
 
             console.log('Filling it with companies');
-            const queryString = `INSERT INTO company (ticker, securityName, sector, country, trend, prices) VALUES` +
+            const queryString = `INSERT INTO company (ticker, "securityName", sector, country, trend, prices) VALUES` +
                 companies.map((company: Company) => ` ('${company.ticker}', '${company.securityName}', '${company.sector}', '${company.country}', '${company.trend}', '${JSON.stringify(company.prices)}')`).join(',');
 
             const result = await connection.query(queryString);
