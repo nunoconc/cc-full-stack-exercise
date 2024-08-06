@@ -1,42 +1,37 @@
 import { JSX, useState, useEffect } from 'react';
 import Row from './row';
 import { Company } from '../../types/company';
+import { getCompanies } from '../../services/securityService';
+import { useSearchParams } from 'react-router-dom';
 
-export default function Item(): JSX.Element {
+export default function List(): JSX.Element {
+    const [ searchParams ] = useSearchParams();
+    const page = parseInt(searchParams.get('page') || '0');
     const [companies, setCompanies] = useState<Company[]>([]);
 
     useEffect(() => {
-        setCompanies([{
-            id: 1,
-            ticker: '000063.SZ',
-            securityName: 'ZTE Corporation',
-            sector: 'Technology',
-            country: 'China',
-            trend: 0.82,
-            prices: [],
-        },
-        {
-            id: 2,
-            ticker: '601800.SS',
-            securityName: 'China Communications Construction',
-            sector: 'Industrials',
-            country: 'China',
-            trend: -0.53,
-            prices: [],
-        }]);
-    }, []);
-    
+        getCompanies(page).then((comp) => {
+            setCompanies(comp);
+        });
+    }, [page]);
+
     return (
         <>
             <table>
-                <tr>
-                    <th>Symbol</th>
-                    <th>Name</th>
-                    <th>Sector</th>
-                    <th>Country</th>
-                    <th>Trend</th>
-                </tr>
-                {companies.map( (company) => <Row company={company} />)}
+                <thead>
+                    <tr>
+                        <th>Symbol</th>
+                        <th>Name</th>
+                        <th>Sector</th>
+                        <th>Country</th>
+                        <th>Trend</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {companies.map((company) => (
+                        <Row key={company.id} company={company} />
+                    ))}
+                </tbody>
             </table>
         </>
     );

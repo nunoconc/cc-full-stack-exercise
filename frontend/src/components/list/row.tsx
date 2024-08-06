@@ -6,7 +6,6 @@ interface IRow {
 }
 
 export default function Row({ company }: IRow): JSX.Element {
-
     return (
         <>
             <tr>
