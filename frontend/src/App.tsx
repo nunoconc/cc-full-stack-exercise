@@ -5,7 +5,7 @@ function App() {
   return (
     <div>
       <header>
-        <h1>{process.env.REACT_APP_MY_EXAMPLE}</h1>
+        <h1>{process.env.REACT_APP_TITLE}</h1>
       </header>
       <main>
         <Router />
