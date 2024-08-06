@@ -28,7 +28,7 @@ export default function List(): JSX.Element {
                 </thead>
                 <tbody>
                     {companies.map((company) => (
-                        <Row key={company.id} company={company} />
+                        <Row key={company.ticker} company={company} />
                     ))}
                 </tbody>
             </table>

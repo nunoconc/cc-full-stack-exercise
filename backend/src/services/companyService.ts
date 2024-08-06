@@ -10,8 +10,8 @@ export default class CompanyService {
         return results;
     }
 
-    async getCompany(id: number): Promise<Company> {
-        const result = await this.postgresDB.findCompany(id);
+    async getCompany(symbol: string): Promise<Company> {
+        const result = await this.postgresDB.findCompany(symbol);
 
         return result;
     }

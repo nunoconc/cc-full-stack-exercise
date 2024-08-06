@@ -14,7 +14,7 @@ export default function Router() {
             loader: listLoader
         },
         {
-            path: '/securities/:id',
+            path: '/securities/:symbol',
             element: <Detail />,
             errorElement: <Error />,
             loader: itemLoader

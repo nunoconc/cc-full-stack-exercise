@@ -23,13 +23,13 @@ router.get('/list', routeCache.cacheSeconds(20), async function (req: Request, r
 
 router.get('/detail', routeCache.cacheSeconds(20), async function (req: Request, res: Response, next: NextFunction) {
     try {
-        const { id } = req.query;
+        const { symbol } = req.query;
 
-        if (typeof id !== 'string' ||  id === 'NaN') {
+        if (typeof symbol !== 'string' ||  symbol === 'NaN') {
             res.status(400).send('Invalid query parameters');
         } else {
 
-            const data = await companyService.getCompany(parseInt(id));
+            const data = await companyService.getCompany(symbol);
             res.json(data);
         }
 

@@ -22,10 +22,10 @@ export async function getCompanies(page: number): Promise<Company[]> {
     });
 }
 
-export async function getCompany(id: number): Promise<Company> {
+export async function getCompany(symbol: string): Promise<Company> {
     return axios.get<Company>(`${apiEndpoint}/company/detail`, {
         params: {
-            id,
+            symbol,
         },
         headers: {
             "Content-Type": "application/json",

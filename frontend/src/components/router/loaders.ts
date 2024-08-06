@@ -12,11 +12,12 @@ const listLoader = (async ({ request }) => {
 }) as LoaderFunction;
 
 const itemLoader = (async ({ params }) => {
-    const id = parseInt(params.id || '0');
+    if (params.symbol) {
+        const company = await getCompany(params.symbol);
 
-    const company = await getCompany(id);
+        return company;
 
-    return company;
+    }
 
 }) as LoaderFunction;
 

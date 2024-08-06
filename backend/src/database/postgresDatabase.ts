@@ -58,13 +58,13 @@ export default class PostgresDatabase {
         }
     }
 
-    async findCompany(id: number): Promise<Company> {
+    async findCompany(symbol: string): Promise<Company> {
         try {
             const connection = await this.pool.connect();
 
             const result = await connection.query(`
                 SELECT * FROM company
-                WHERE id in(${id});
+                WHERE ticker = ('${symbol}');
             `);
 
             return result.rows[0];
