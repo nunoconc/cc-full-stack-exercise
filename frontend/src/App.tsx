@@ -1,13 +1,14 @@
 import React from 'react';
+import Router from './components/router';
 
 function App() {
   return (
     <div>
       <header>
-        <h1>Header</h1>
+        <h1>{process.env.REACT_APP_MY_EXAMPLE}</h1>
       </header>
       <main>
-        <h1>{process.env.REACT_APP_MY_EXAMPLE}</h1>
+        <Router />
       </main>
     </div>
   );
