@@ -1,6 +1,7 @@
 import { JSX, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Company } from '../../types/company';
+import { getCompany } from '../../services/securityService';
 
 export default function Detail(): JSX.Element {
     const { id } = useParams();
@@ -8,14 +9,8 @@ export default function Detail(): JSX.Element {
 
     useEffect(() => {
         if (id) {
-            setCompany({
-                id: parseInt(id),
-                ticker: '000063.SZ',
-                securityName: 'ZTE Corporation',
-                sector: 'Technology',
-                country: 'China',
-                trend: 0.82,
-                prices: [],
+            getCompany(parseInt(id)).then((comp) => {
+                setCompany(comp);
             });
         }
     }, []);
@@ -27,9 +22,10 @@ export default function Detail(): JSX.Element {
             </h2>
             <p>Sectore: {company?.sector}</p>
             <p>Country: {company?.country}</p>
-            
+
             <div>
                 <p>..... Chart ....</p>
+                <p>{company?.prices?.[0].volume}</p>
             </div>
         </div>
     );

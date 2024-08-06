@@ -18,7 +18,23 @@ export async function getCompanies(page: number): Promise<Company[]> {
         return response.data;
     })
     .catch( (error) => {
-        console.error(error);
-        return [];
+       throw error;
+    });
+}
+
+export async function getCompany(id: number): Promise<Company> {
+    return axios.get<Company>(`${apiEndpoint}/company/detail`, {
+        params: {
+            id,
+        },
+        headers: {
+            "Content-Type": "application/json",
+        }
+    })
+    .then( (response) => {
+        return response.data;
+    })
+    .catch( (error) => {
+        throw error;
     });
 }

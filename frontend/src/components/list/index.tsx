@@ -10,8 +10,8 @@ export default function List(): JSX.Element {
     const [companies, setCompanies] = useState<Company[]>([]);
 
     useEffect(() => {
-        getCompanies(page).then((comp) => {
-            setCompanies(comp);
+        getCompanies(page).then((comps) => {
+            setCompanies(comps);
         });
     }, [page]);
 
