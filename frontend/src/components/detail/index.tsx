@@ -1,19 +1,14 @@
 import { JSX, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useLoaderData } from 'react-router-dom';
 import { Company } from '../../types/company';
-import { getCompany } from '../../services/securityService';
 
 export default function Detail(): JSX.Element {
-    const { id } = useParams();
     const [company, setCompany] = useState<Company>();
+    const data = useLoaderData() as Company;
 
     useEffect(() => {
-        if (id) {
-            getCompany(parseInt(id)).then((comp) => {
-                setCompany(comp);
-            });
-        }
-    }, []);
+        setCompany(data);
+    }, [data]);
 
     return (
         <div>

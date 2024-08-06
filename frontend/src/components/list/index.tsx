@@ -1,20 +1,18 @@
 import { JSX, useState, useEffect } from 'react';
 import Row from './row';
 import { Company } from '../../types/company';
-import { getCompanies } from '../../services/securityService';
-import { useSearchParams } from 'react-router-dom';
+import { useLoaderData, useSearchParams } from 'react-router-dom';
 import Nave from './nave';
 
 export default function List(): JSX.Element {
     const [ searchParams ] = useSearchParams();
     const page = parseInt(searchParams.get('page') || '0');
     const [companies, setCompanies] = useState<Company[]>([]);
+    const data = useLoaderData() as Company[];
 
     useEffect(() => {
-        getCompanies(page).then((comps) => {
-            setCompanies(comps);
-        });
-    }, [page]);
+        setCompanies(data);
+    }, [page, data]);
 
     return (
         <>
