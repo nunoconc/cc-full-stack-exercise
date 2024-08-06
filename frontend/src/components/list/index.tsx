@@ -3,6 +3,7 @@ import Row from './row';
 import { Company } from '../../types/company';
 import { getCompanies } from '../../services/securityService';
 import { useSearchParams } from 'react-router-dom';
+import Nave from './nave';
 
 export default function List(): JSX.Element {
     const [ searchParams ] = useSearchParams();
@@ -33,6 +34,7 @@ export default function List(): JSX.Element {
                     ))}
                 </tbody>
             </table>
+            <Nave page={page} hideNext={false} />
         </>
     );
 }

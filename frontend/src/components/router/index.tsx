@@ -6,10 +6,6 @@ import List from '../list';
 export default function Router() {
     const router = createBrowserRouter([
         {
-            path: '/',
-            element: <List />,
-        },
-        {
             path: '/securities',
             element: <List />,
         },
@@ -19,7 +15,7 @@ export default function Router() {
         },
         {
             path: '*',
-            element: <Navigate to="/" replace={true} />
+            element: <Navigate to="/securities" replace={false} />
         }
     ]);
 
