@@ -5,7 +5,6 @@ import morgan from 'morgan';
 import PostgresDatabase from './database/postgresDatabase';
 import companyRoute from './routes/companyRoute';
 
-
 dotenv.config();
 
 // seed database with data.json
@@ -20,6 +19,16 @@ app.use(express.json());
 
 // allow dev logging
 app.use(morgan('dev'));
+
+// allow cross origin for the frontend origin
+app.all('*', (req, res, next) => {
+    res.header('Access-Control-Allow-Origin', req.app.get('env') === 'development' ?
+        'http://localhost:3000'
+        : 'prod-origin'
+    );
+    res.header('Access-Control-Allow-Headers', 'Content-Type');
+    next();
+});
 
 // route company path
 app.use('/company', companyRoute);
