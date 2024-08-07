@@ -3,17 +3,42 @@ import { Company } from '../types/company';
 
 export default class CompanyService {
     postgresDB = new PostgresDatabase();
+    timeoutsCount = 0;
 
     async getCompanies(pageSize: number, index: number): Promise<Company[]> {
-        const results = await this.postgresDB.findCompanies(pageSize, index * pageSize);
+        try {
+            const results = await this.postgresDB.findCompanies(pageSize, index * pageSize);
+            return results;
+        } catch (error) {
+            this.checkPoolTimeoutError(error);
+            throw error;
+        }
 
-        return results;
+
     }
 
     async getCompany(symbol: string): Promise<Company> {
-        const result = await this.postgresDB.findCompany(symbol);
+        try {
+            const result = await this.postgresDB.findCompany(symbol);
 
-        return result;
+            return result;
+
+        } catch (error) {
+            this.checkPoolTimeoutError(error);
+            throw error;
+        }
     }
 
+
+    private checkPoolTimeoutError(error: any) {
+        if(error?.hasOwnProperty('stack')) {
+            const shouldRetry = this.timeoutsCount < parseInt(process.env.TIMEOUTS_COUNT || '1');
+            const isPoolError = /node_modules\/pg-pool/m.test(error.stack);
+            
+
+            if(shouldRetry && isPoolError) {
+                this.postgresDB = new PostgresDatabase();
+            }
+        }        
+    }
 }
