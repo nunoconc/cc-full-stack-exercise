@@ -1,16 +1,17 @@
 import { Button } from '@mui/material';
-import { JSX, useEffect, useState } from 'react';
+import { JSX, useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './index.css';
-import { getCompanies } from '../../services/securityService';
+import AppContext from '../../context/appContext';
 
 interface INave {
     page: number;
 }
 
 export default function Nave({ page }: INave): JSX.Element {
-    const navigate = useNavigate();
+    const { securityService } = useContext(AppContext);
     const [hideNext, setHideNext] = useState<boolean>(false);
+    const navigate = useNavigate();
 
     const goTo = (pg: number) => {
         if (pg >= 0) {
@@ -19,7 +20,7 @@ export default function Nave({ page }: INave): JSX.Element {
     };
 
     useEffect(() => {
-        getCompanies(page + 1).then((companies) => {
+        securityService.getCompanies(page + 1).then((companies) => {
             if (!companies.length) {
                 setHideNext(true);
             } else {

@@ -1,26 +1,22 @@
-import { LoaderFunction } from 'react-router-dom';
-import { getCompanies, getCompany } from '../../services/securityService';
+import { LoaderFunction, LoaderFunctionArgs} from 'react-router-dom';
+import SecurityService from '../../services/securityService';
 
-const listLoader = (async ({ request }) => {
+const listLoader = async ({ request }: LoaderFunctionArgs, securityService: SecurityService) => {
     const url = new URL(request.url);
     const page = parseInt(url.searchParams.get('page') || '0');
 
-    const companies = await getCompanies(page);
+    const companies = await securityService.getCompanies(page);
 
     return companies;
+};
 
-}) as LoaderFunction;
-
-const itemLoader = (async ({ params }) => {
+const itemLoader = async ({ params }: LoaderFunctionArgs, securityService: SecurityService) => {
     if (params.symbol) {
-        const company = await getCompany(params.symbol);
+        const company = await securityService.getCompany(params.symbol);
 
         return company;
-
     }
-
-}) as LoaderFunction;
-
+};
 
 export {
     listLoader,
