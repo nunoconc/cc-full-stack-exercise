@@ -1,5 +1,5 @@
 import PostgresDatabase from "../database/postgresDatabase";
-import { Company } from '../types/company';
+import { Company } from '../models/company';
 
 export default class CompanyService {
     postgresDB = new PostgresDatabase();

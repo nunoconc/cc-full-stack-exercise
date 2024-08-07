@@ -1,8 +1,4 @@
-export type Price = {
-    date: string,
-    close: string,
-    volume: string,
-}
+import { Price } from "./price";
 
 export type Company = {
     id: number,

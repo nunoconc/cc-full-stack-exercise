@@ -1,5 +1,5 @@
 import { Pool } from 'pg';
-import { Company } from '../types/company';
+import { Company } from '../models/company';
 import data from '../data/data.json';
 
 export default class PostgresDatabase {
