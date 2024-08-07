@@ -1,0 +1,2 @@
+npm --prefix ./frontend run precommit
+npm --prefix ./backend run precommit

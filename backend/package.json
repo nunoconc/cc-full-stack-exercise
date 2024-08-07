@@ -2,7 +2,7 @@
     "name": "backend",
     "version": "1.0.0",
     "description": "Backend REST api for sercurity",
-    "main": "src/index.ts",
+    "private": true,
     "scripts": {
         "precommit": "lint-staged",
         "dev": "ts-node-dev --respawn src/index.ts",
@@ -13,16 +13,15 @@
         "prettier": "npx prettier --check .",
         "prettier:fix": "npx prettier --write ."
     },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/nunoconc/eai-full-stack-exercise.git"
+    "dependencies": {
+        "dotenv": "^16.4.5",
+        "express": "^4.19.2",
+        "morgan": "^1.10.0",
+        "pg": "^8.12.0",
+        "pg-pool": "^3.6.2",
+        "route-cache": "^0.7.0",
+        "typescript": "^4.9.5"
     },
-    "author": "nunoconc",
-    "license": "ISC",
-    "bugs": {
-        "url": "https://github.com/nunoconc/eai-full-stack-exercise/issues"
-    },
-    "homepage": "https://github.com/nunoconc/eai-full-stack-exercise#readme",
     "devDependencies": {
         "@babel/core": "^7.25.2",
         "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
@@ -34,21 +33,15 @@
         "@types/node": "^22.1.0",
         "@types/pg": "^8.11.6",
         "@types/route-cache": "^0.5.5",
-        "@typescript-eslint/parser": "^5.62.0",
+        "@typescript-eslint/eslint-plugin": "^8.0.1",
+        "@typescript-eslint/parser": "^8.0.0",
         "eslint": "^8.56.0",
         "eslint-plugin-import": "^2.29.1",
+        "lint-staged": "^15.2.8",
         "prettier": "^3.2.4",
         "ts-node": "^10.9.2",
         "ts-node-dev": "^2.0.0",
         "typescript": "^5.5.4"
-    },
-    "dependencies": {
-        "dotenv": "^16.4.5",
-        "express": "^4.19.2",
-        "morgan": "^1.10.0",
-        "pg": "^8.12.0",
-        "pg-pool": "^3.6.2",
-        "route-cache": "^0.7.0"
     },
     "lint-staged": {
         "**/*.{js,jsx,ts,tsx}": [

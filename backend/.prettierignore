@@ -2,3 +2,5 @@ node_modules
 # Ignore artifacts:
 .prettierignore
 package-lock.json
+.env
+.dev.env

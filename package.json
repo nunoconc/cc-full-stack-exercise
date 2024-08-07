@@ -1,0 +1,17 @@
+{
+  "name": "eai-full-stack-exercise",
+  "version": "1.0.0",
+  "description": "EAI Full Stack Exercise",
+  "scripts": {
+    "postinstall": "[ -d '.husky' ] && husky install || true"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nunoconc/eai-full-stack-exercise.git"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^18.6.0",
+    "@commitlint/config-conventional": "^18.6.0",
+    "husky": "^9.1.4"
+  }
+}
