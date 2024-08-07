@@ -1,4 +1,4 @@
-tbody tr:nth-child(odd){
+tbody tr:nth-child(odd) {
     background-color: whitesmoke;
 }
 
@@ -9,14 +9,26 @@ tbody tr:nth-child(odd){
     align-items: center;
 }
 
+.tableRow {
+    cursor: pointer;
+        
+    &:hover::before {
+        transform: scale(1.1);
+    }
+   
+    &:hover {
+        box-shadow: 0 0 5px darkgray;
+    }
+}
+
 .trendCell {
-    &.blue{
+    &.blue {
         background-color: darkblue;
     }
-    &.red{
+    &.red {
         background-color: darkred;
     }
-    &.green{
+    &.green {
         background-color: darkgreen;
     }
 }
