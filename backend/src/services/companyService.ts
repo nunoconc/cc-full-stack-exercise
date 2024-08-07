@@ -13,7 +13,7 @@ export default class CompanyService {
             );
             return results;
         } catch (error) {
-            this.checkPoolTimeoutError(error);
+            this.checkPoolTimeoutError(error as Error);
             throw error;
         }
     }
@@ -24,13 +24,13 @@ export default class CompanyService {
 
             return result;
         } catch (error) {
-            this.checkPoolTimeoutError(error);
+            this.checkPoolTimeoutError(error as Error);
             throw error;
         }
     }
 
-    private checkPoolTimeoutError(error: any) {
-        if (error?.hasOwnProperty('stack')) {
+    private checkPoolTimeoutError(error: Error) {
+        if (error?.stack) {
             const shouldRetry =
                 this.timeoutsCount <
                 parseInt(process.env.TIMEOUTS_COUNT || '1');
