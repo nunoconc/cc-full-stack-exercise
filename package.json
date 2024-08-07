@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "EAI Full Stack Exercise",
   "scripts": {
-    "postinstall": "[ -d '.husky' ] && husky install || true"
+    "postinstall": "[ -d '.husky' ] && husky install || true",
+    "start:backend": "npm run --prefix ./backend docker:detach && npm run --prefix ./backend start",
+    "start:frontend":"npm run --prefix ./backend && npm run --prefix ./frontend start"
   },
   "repository": {
     "type": "git",

@@ -22,7 +22,10 @@ app.use(morgan('dev'));
 // allow cross origin for the frontend origin
 app.all('*', (req, res, next) => {
     res.header('Access-Control-Allow-Origin', process.env.ALLOWED_CORS);
-    res.header('Access-Control-Allow-Headers', 'Content-Type');
+    res.header(
+        'Access-Control-Allow-Headers',
+        'Content-Type, Pragma, Access-Control-Allow-Origin, Cache-Control, Expires'
+    );
     next();
 });
 

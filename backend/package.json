@@ -6,8 +6,10 @@
     "scripts": {
         "precommit": "lint-staged",
         "dev": "ts-node-dev --respawn src/index.ts",
+        "start": "ts-node src/index.ts",
         "build": "tsc",
         "docker": "docker-compose up",
+        "docker:detach": "docker-compose up --detach",
         "lint": "eslint \"src/**/*{.js,.jsx,.ts,.tsx}\"",
         "lint:fix": "eslint \"src/**/*{.js,.jsx,.ts,.tsx,.yml}\" --fix",
         "prettier": "npx prettier --check .",
