@@ -29,7 +29,7 @@ export default function List(): JSX.Element {
                 <TableHead>
                     <TableRow>
                         {tableHeaders.map((header) => (
-                            <TableCell>
+                            <TableCell key={header}>
                                 <Typography variant="h5">{header}</Typography>
                             </TableCell>
                         ))}
