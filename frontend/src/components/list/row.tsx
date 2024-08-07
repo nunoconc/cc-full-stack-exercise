@@ -13,7 +13,10 @@ export default function Row({ company }: IRow): JSX.Element {
         company.trend > 0.2 ? 'blue' : company.trend > -0.2 ? 'green' : 'red';
 
     return (
-        <TableRow className='tableRow' onClick={() => navigate(`/securities/${company.ticker}`)}>
+        <TableRow
+            className="tableRow"
+            onClick={() => navigate(`/securities/${company.ticker}`)}
+        >
             <TableCell>{company.ticker}</TableCell>
             <TableCell>{company.securityName}</TableCell>
             <TableCell>{company.sector}</TableCell>

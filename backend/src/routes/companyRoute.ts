@@ -3,41 +3,52 @@ import routeCache from 'route-cache';
 import CompanyService from '../services/companyService';
 
 const router = express.Router();
-const companyService = new CompanyService()
+const companyService = new CompanyService();
 
-router.get('/list', routeCache.cacheSeconds(20), async function (req: Request, res: Response, next: NextFunction) {
-    const { pageSize, index } = req.query;
+router.get(
+    '/list',
+    routeCache.cacheSeconds(20),
+    async function (req: Request, res: Response, next: NextFunction) {
+        const { pageSize, index } = req.query;
 
-    try {
-        if (typeof pageSize !== 'string' || typeof index !== 'string' || pageSize === 'NaN' || index === 'NaN') {
-            res.status(400).send('Invalid query parameters');
-        } else {
-
-            const data = await companyService.getCompanies(parseInt(pageSize), parseInt(index));
-            res.json(data);
+        try {
+            if (
+                typeof pageSize !== 'string' ||
+                typeof index !== 'string' ||
+                pageSize === 'NaN' ||
+                index === 'NaN'
+            ) {
+                res.status(400).send('Invalid query parameters');
+            } else {
+                const data = await companyService.getCompanies(
+                    parseInt(pageSize),
+                    parseInt(index)
+                );
+                res.json(data);
+            }
+        } catch (error) {
+            next(error);
         }
-    } catch (error) {
-        next(error);
-    };
-});
+    }
+);
 
-router.get('/detail', routeCache.cacheSeconds(20), async function (req: Request, res: Response, next: NextFunction) {
-    try {
-        const { symbol } = req.query;
+router.get(
+    '/detail',
+    routeCache.cacheSeconds(20),
+    async function (req: Request, res: Response, next: NextFunction) {
+        try {
+            const { symbol } = req.query;
 
-        if (typeof symbol !== 'string' ||  symbol === 'NaN') {
-            res.status(400).send('Invalid query parameters');
-        } else {
-
-            const data = await companyService.getCompany(symbol);
-            res.json(data);
+            if (typeof symbol !== 'string' || symbol === 'NaN') {
+                res.status(400).send('Invalid query parameters');
+            } else {
+                const data = await companyService.getCompany(symbol);
+                res.json(data);
+            }
+        } catch (error) {
+            next(error);
         }
-
-       
-    } catch (error) {
-        next(error);
-    };
-
-});
+    }
+);
 
 export default router;

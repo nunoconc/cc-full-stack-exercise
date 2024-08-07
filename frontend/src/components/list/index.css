@@ -11,11 +11,11 @@ tbody tr:nth-child(odd) {
 
 .tableRow {
     cursor: pointer;
-        
+
     &:hover::before {
         transform: scale(1.1);
     }
-   
+
     &:hover {
         box-shadow: 0 0 5px darkgray;
     }

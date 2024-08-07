@@ -1,5 +1,5 @@
 export type Price = {
-    date: string,
-    close: string,
-    volume: string,
-}
+    date: string;
+    close: string;
+    volume: string;
+};

@@ -12,25 +12,25 @@ import AppContext from '../../context/appContext';
 
 export default function Router() {
     const { securityService } = useContext(AppContext);
-    const MemoError =  memo(Error);
+    const MemoError = memo(Error);
 
     const router = createBrowserRouter([
         {
             path: '/securities',
             element: <List />,
-            errorElement: <MemoError/>,
+            errorElement: <MemoError />,
             loader: (args) => listLoader(args, securityService),
         },
         {
             path: '/securities/:symbol',
             element: <Detail />,
-            errorElement: <MemoError/>,
+            errorElement: <MemoError />,
             loader: (args) => itemLoader(args, securityService),
         },
         {
             path: '*',
             element: <Navigate to="/securities" replace={false} />,
-            errorElement: <MemoError/>,
+            errorElement: <MemoError />,
         },
     ]);
 

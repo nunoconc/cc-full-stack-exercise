@@ -3,23 +3,25 @@ import SecurityService from '../services/securityService';
 import { JSX } from 'react';
 
 interface IAppContext {
-  securityService: SecurityService,
+    securityService: SecurityService;
 }
 
 const AppContext = createContext<IAppContext>({
-  securityService: new SecurityService(),
+    securityService: new SecurityService(),
 });
 
-export const AppContextProvider = ({ children }: { children: JSX.Element}) => {
-  const [securityService] = useState(new SecurityService());
+export const AppContextProvider = ({ children }: { children: JSX.Element }) => {
+    const [securityService] = useState(new SecurityService());
 
-  return (
-    <AppContext.Provider value={{
-      securityService,
-    }}>
-      {children}
-    </AppContext.Provider>
-  );
+    return (
+        <AppContext.Provider
+            value={{
+                securityService,
+            }}
+        >
+            {children}
+        </AppContext.Provider>
+    );
 };
 
 export default AppContext;

@@ -28,9 +28,7 @@ export default function List(): JSX.Element {
             <TableRow>
                 {tableHeaders.map((header) => (
                     <TableCell key={header}>
-                        <Typography variant="h5">
-                            {header}
-                        </Typography>
+                        <Typography variant="h5">{header}</Typography>
                     </TableCell>
                 ))}
             </TableRow>
@@ -41,9 +39,7 @@ export default function List(): JSX.Element {
     return (
         <div className="listContainer">
             <Table>
-                <TableHead>
-                    {tableHead}
-                </TableHead>
+                <TableHead>{tableHead}</TableHead>
                 <TableBody className="tableBody">
                     {companies.map((company) => (
                         <Row key={company.ticker} company={company} />

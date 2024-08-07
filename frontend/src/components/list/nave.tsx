@@ -20,15 +20,18 @@ export default function Nave({ page }: INave): JSX.Element {
     };
 
     useEffect(() => {
-        securityService.getCompanies(page + 1).then((companies) => {
-            if (!companies.length) {
+        securityService
+            .getCompanies(page + 1)
+            .then((companies) => {
+                if (!companies.length) {
+                    setHideNext(true);
+                } else {
+                    setHideNext(false);
+                }
+            })
+            .catch(() => {
                 setHideNext(true);
-            } else {
-                setHideNext(false);
-            }
-        }).catch(() => {
-            setHideNext(true);
-        });
+            });
     }, [page]);
 
     return (

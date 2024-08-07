@@ -19,12 +19,14 @@ export default function Detail(): JSX.Element {
     return (
         <div className="detailContainer">
             <Typography variant="h4">
-                <p>{company?.ticker} - {company?.securityName}</p>
+                <p>
+                    {company?.ticker} - {company?.securityName}
+                </p>
             </Typography>
-            <Typography variant='h6'>
+            <Typography variant="h6">
                 <b>Sector:</b> {company?.sector}
             </Typography>
-            <Typography variant='h6'>
+            <Typography variant="h6">
                 <b>Country: </b>
                 {company?.country}
             </Typography>

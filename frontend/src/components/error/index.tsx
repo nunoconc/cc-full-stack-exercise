@@ -3,10 +3,9 @@ import { Typography } from '@mui/material';
 import { useRouteError } from 'react-router-dom';
 import './index.css';
 
-
 export default function Error(): JSX.Element {
     const error = useRouteError() as Error;
-    
+
     return (
         <div className="errorContainer">
             <Typography variant="h4">

@@ -2,27 +2,30 @@ import Highcharts from 'highcharts';
 import { Company, PriceEnum } from '../../types/company';
 
 interface IDataMap {
-    close: number[],
-    volume: number[],
-    date: string[]
+    close: number[];
+    volume: number[];
+    date: string[];
 }
 
 export function buildOptions(company: Company): Highcharts.Options {
     const dataMap: IDataMap = company.prices
-        .sort((a,b) => {
+        .sort((a, b) => {
             return Date.parse(a.date) - Date.parse(b.date);
         })
-        .reduce((acc, curr) => {
-            acc.close.push(parseInt(curr.close));
-            acc.volume.push(parseInt(curr.volume));
-            acc.date.push(curr.date);
+        .reduce(
+            (acc, curr) => {
+                acc.close.push(parseInt(curr.close));
+                acc.volume.push(parseInt(curr.volume));
+                acc.date.push(curr.date);
 
-            return acc;
-        }, {
-            close: [],
-            volume: [],
-            date: [],
-        } as IDataMap);
+                return acc;
+            },
+            {
+                close: [],
+                volume: [],
+                date: [],
+            } as IDataMap
+        );
 
     return {
         chart: {
@@ -36,10 +39,13 @@ export function buildOptions(company: Company): Highcharts.Options {
             categories: dataMap.date,
             labels: {
                 formatter: function () {
-                    return Highcharts.dateFormat('%b\'%y', Date.parse(this.value as string));
-                }
+                    return Highcharts.dateFormat(
+                        "%b'%y",
+                        Date.parse(this.value as string)
+                    );
+                },
             },
-            uniqueNames: true
+            uniqueNames: true,
         },
         yAxis: [
             {

@@ -11,7 +11,6 @@ dotenv.config();
 const pgDB = new PostgresDatabase();
 pgDB.init();
 
-
 const app = express();
 
 // allow json parser
@@ -36,7 +35,11 @@ app.use(function (req: Request, res: Response, next: NextFunction) {
 });
 
 // error handler
-app.use(function (err: { message: string, status: number }, req: Request, res: Response) {
+app.use(function (
+    err: { message: string; status: number },
+    req: Request,
+    res: Response
+) {
     // set locals, only providing error in development
     res.locals.message = err.message;
     res.locals.error = req.app.get('env') === 'development' ? err : {};

@@ -1,7 +1,10 @@
-import { LoaderFunction, LoaderFunctionArgs} from 'react-router-dom';
+import { LoaderFunctionArgs } from 'react-router-dom';
 import SecurityService from '../../services/securityService';
 
-const listLoader = async ({ request }: LoaderFunctionArgs, securityService: SecurityService) => {
+const listLoader = async (
+    { request }: LoaderFunctionArgs,
+    securityService: SecurityService
+) => {
     const url = new URL(request.url);
     const page = parseInt(url.searchParams.get('page') || '0');
 
@@ -10,7 +13,10 @@ const listLoader = async ({ request }: LoaderFunctionArgs, securityService: Secu
     return companies;
 };
 
-const itemLoader = async ({ params }: LoaderFunctionArgs, securityService: SecurityService) => {
+const itemLoader = async (
+    { params }: LoaderFunctionArgs,
+    securityService: SecurityService
+) => {
     if (params.symbol) {
         const company = await securityService.getCompany(params.symbol);
 
@@ -18,7 +24,4 @@ const itemLoader = async ({ params }: LoaderFunctionArgs, securityService: Secur
     }
 };
 
-export {
-    listLoader,
-    itemLoader,
-};
+export { listLoader, itemLoader };
