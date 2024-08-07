@@ -41,7 +41,7 @@ export default function List(): JSX.Element {
                     ))}
                 </TableBody>
             </Table>
-            <Nave page={page} hideNext={false} />
+            <Nave page={page} />
         </div>
     );
 }
