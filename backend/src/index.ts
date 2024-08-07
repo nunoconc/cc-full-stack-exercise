@@ -22,10 +22,7 @@ app.use(morgan('dev'));
 
 // allow cross origin for the frontend origin
 app.all('*', (req, res, next) => {
-    res.header('Access-Control-Allow-Origin', req.app.get('env') === 'development' ?
-        'http://localhost:3000'
-        : 'prod-origin'
-    );
+    res.header('Access-Control-Allow-Origin', process.env.ALLOWED_CORS);
     res.header('Access-Control-Allow-Headers', 'Content-Type');
     next();
 });
@@ -49,5 +46,5 @@ app.use(function (err: { message: string, status: number }, req: Request, res: R
 });
 
 app.listen(process.env.PORT, () => {
-    console.log(`Server is running on http://localhost:${process.env.PORT}`);
+    console.log(`Server is running on port:${process.env.PORT}`);
 });
