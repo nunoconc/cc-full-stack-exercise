@@ -4,6 +4,8 @@ import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import { Company, PriceEnum } from '../../types/company';
 import { buildOptions } from './highchartOptions';
+import { Typography } from '@mui/material';
+import './index.css';
 
 export default function Detail(): JSX.Element {
     const [company, setCompany] = useState<Company>();
@@ -15,13 +17,17 @@ export default function Detail(): JSX.Element {
     }, [data]);
 
     return (
-        <div>
-            <h2>
-                {company?.ticker} - {company?.securityName}
-            </h2>
-            <p>Sectore: {company?.sector}</p>
-            <p>Country: {company?.country}</p>
-
+        <div className="detailContainer">
+            <Typography variant="h4">
+                <p>{company?.ticker} - {company?.securityName}</p>
+            </Typography>
+            <Typography variant='h6'>
+                <b>Sector:</b> {company?.sector}
+            </Typography>
+            <Typography variant='h6'>
+                <b>Country: </b>
+                {company?.country}
+            </Typography>
             {company && (
                 <div>
                     <HighchartsReact

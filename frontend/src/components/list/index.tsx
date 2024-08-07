@@ -9,6 +9,7 @@ import TableCell from '@mui/material/TableCell';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import { Typography } from '@mui/material';
+import './index.css';
 
 const tableHeaders = ['Symbol', 'Name', 'Sector', 'Country', 'Trend'];
 
