@@ -26,6 +26,8 @@ export default function Nave({ page }: INave): JSX.Element {
             } else {
                 setHideNext(false);
             }
+        }).catch(() => {
+            setHideNext(true);
         });
     }, [page]);
 

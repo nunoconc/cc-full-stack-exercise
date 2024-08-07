@@ -1,4 +1,4 @@
-import { JSX, useState, useEffect } from 'react';
+import { JSX, useState, useEffect, useMemo } from 'react';
 import Row from './row';
 import { Company } from '../../types/company';
 import { useLoaderData, useSearchParams } from 'react-router-dom';
@@ -23,19 +23,28 @@ export default function List(): JSX.Element {
         setCompanies(data);
     }, [page, data]);
 
+    const tableHead = useMemo(
+        () => (
+            <TableRow>
+                {tableHeaders.map((header) => (
+                    <TableCell key={header}>
+                        <Typography variant="h5">
+                            {header}
+                        </Typography>
+                    </TableCell>
+                ))}
+            </TableRow>
+        ),
+        []
+    );
+
     return (
-        <div className='listContainer'>
+        <div className="listContainer">
             <Table>
                 <TableHead>
-                    <TableRow>
-                        {tableHeaders.map((header) => (
-                            <TableCell key={header}>
-                                <Typography variant="h5">{header}</Typography>
-                            </TableCell>
-                        ))}
-                    </TableRow>
+                    {tableHead}
                 </TableHead>
-                <TableBody className='tableBody'>
+                <TableBody className="tableBody">
                     {companies.map((company) => (
                         <Row key={company.ticker} company={company} />
                     ))}
