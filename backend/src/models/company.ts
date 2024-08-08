@@ -1,4 +1,8 @@
-import { Price } from './price';
+export type Price = {
+    date: string;
+    close: string;
+    volume: string;
+};
 
 export type Company = {
     id: number;

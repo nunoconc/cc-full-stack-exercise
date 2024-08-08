@@ -31,31 +31,15 @@ Just run the following commands, to launch each part:
 
 ### Database
 
-Developed using PostgreSQL database.
-The values are loaded initially using the json data file.
-
-See more inside:
-
-- [folder](/database)
-- [documentation](/database/README.md)
+See more inside [documentation](/database/README.md)
 
 ### Backend
 
-Consists in a Node.js/Typescript REST API that will retrieve data from the database and deliver to the frontend.
-
-See more inside:
-
-- [folder](/backend)
-- [documentation](/backend/README.md)
+See more inside [documentation](/backend/README.md)
 
 ### Frontend
 
-React SPA web application to display the data obtained from the backend.
-
-See more inside:
-
-- [folder](/frontend)
-- [documentation](/frontend/README.md)
+See more inside [documentation](/frontend/README.md)
 
 ## Libraries
 

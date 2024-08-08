@@ -33,7 +33,7 @@ export default class CompanyService {
         if (error?.stack) {
             const shouldRetry =
                 this.timeoutsCount <
-                parseInt(process.env.TIMEOUTS_COUNT || '1');
+                parseInt(process.env.DATABASE_TIMEOUTS || '1');
             const isPoolError = /node_modules\/pg-pool/m.test(error.stack);
 
             if (shouldRetry && isPoolError) {

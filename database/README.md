@@ -8,6 +8,11 @@ The values are loaded initially using the json data file.
 Initialize database container.\
 Storage for the data from [data.json](./data/data.json) file.
 
+## Setup
+
+For this project will be necessary to install `npm` and `node`.\
+Before running first start from install command `npm install`.
+
 ## Run
 
 Just run the global command `npm run start`.
@@ -33,4 +38,4 @@ Just run the global command `npm run start`.
 
 ## Libraries
 
-- **Pg** - node postgres library to connect to database
+- **pg** - node postgres library to connect to database

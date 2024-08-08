@@ -7,7 +7,7 @@ React SPA web application to display the data obtained from the backend.
 Web application that presents companies security information.\
 Displays two different screens:
 
--   List (/securities) or (/securities?page={n})
+-   List (/securities) or (/securities?page={p})
 -   Details (/securities/:symbol)
 
 ## Setup
