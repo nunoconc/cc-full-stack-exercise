@@ -4,7 +4,9 @@ import { Link, Typography } from '@mui/material';
 import './index.css';
 import { AppContextProvider } from './context/appContext';
 
+// Initial app that loads the header title and the router
 function App() {
+    // Memo header because it's static
     const header = useMemo(
         () => (
             <header className="header">

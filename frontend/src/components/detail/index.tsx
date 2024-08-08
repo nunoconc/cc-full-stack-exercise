@@ -7,11 +7,20 @@ import { buildOptions } from './highchartOptions';
 import { Typography } from '@mui/material';
 import './index.css';
 
+/**
+ * Detail component to show company details
+ *
+ * @export
+ * @returns {JSX.Element}
+ */
 export default function Detail(): JSX.Element {
     const [company, setCompany] = useState<Company>();
+    // Reference to chart to optimize renders
     const chartComponentRef = useRef<HighchartsReact.RefObject>(null);
+    // Loads data from router loader
     const data = useLoaderData() as Company;
 
+    // Update company according to loader data change
     useEffect(() => {
         setCompany(data);
     }, [data]);

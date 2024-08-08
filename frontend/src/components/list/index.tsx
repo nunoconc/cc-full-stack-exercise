@@ -11,18 +11,29 @@ import TableRow from '@mui/material/TableRow';
 import { Typography } from '@mui/material';
 import './index.css';
 
+// Set table headers
 const tableHeaders = ['Symbol', 'Name', 'Sector', 'Country', 'Trend'];
 
+/**
+ * List component to show tabel of companies
+ *
+ * @export
+ * @returns {JSX.Element}
+ */
 export default function List(): JSX.Element {
+    const [companies, setCompanies] = useState<Company[]>([]);
+    // Checks changes on page to send to navigation component
     const [searchParams] = useSearchParams();
     const page = parseInt(searchParams.get('page') || '0');
-    const [companies, setCompanies] = useState<Company[]>([]);
+    // Gets data from route loader
     const data = useLoaderData() as Company[];
 
+    // Update companies according to loader data changes
     useEffect(() => {
         setCompanies(data);
     }, [page, data]);
 
+    // Map headers and memo to reuse them since they are static
     const tableHead = useMemo(
         () => (
             <TableRow>
@@ -41,9 +52,12 @@ export default function List(): JSX.Element {
             <Table>
                 <TableHead>{tableHead}</TableHead>
                 <TableBody className="tableBody">
-                    {companies.map((company) => (
-                        <Row key={company.ticker} company={company} />
-                    ))}
+                    {
+                        //Maps companies into row components
+                        companies.map((company) => (
+                            <Row key={company.ticker} company={company} />
+                        ))
+                    }
                 </TableBody>
             </Table>
             <Nave page={page} />

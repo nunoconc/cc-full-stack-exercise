@@ -3,6 +3,13 @@ import { Typography } from '@mui/material';
 import { useRouteError } from 'react-router-dom';
 import './index.css';
 
+/**
+ * Error component to show global error message
+ *
+ *
+ * @export
+ * @returns {JSX.Element}
+ */
 export default function Error(): JSX.Element {
     const error = useRouteError() as Error;
 

@@ -7,8 +7,18 @@ interface IRow {
     company: Company;
 }
 
+/**
+ * Row comonent to show details of a component item of the table
+ *
+ * @export
+ * @param {IRow} param0
+ * @param {Company} param0.company
+ * @returns {JSX.Element}
+ */
 export default function Row({ company }: IRow): JSX.Element {
+    // Used to navigate via router
     const navigate = useNavigate();
+    // Trend background color css logic
     const color =
         company.trend > 0.2 ? 'blue' : company.trend > -0.2 ? 'green' : 'red';
 

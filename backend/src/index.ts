@@ -15,7 +15,7 @@ app.use(express.json());
 // allow dev logging
 app.use(morgan('dev'));
 
-// allow cross origin for the frontend origin
+// allow cross origin for the frontend application
 app.all('*', (req, res, next) => {
     res.header('Access-Control-Allow-Origin', process.env.ALLOWED_CORS);
     res.header(
