@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "EAI Full Stack Exercise",
   "scripts": {
-    "postinstall": "[ -d '.husky' ] && husky install || true",
+    "postinstall": "[ -d '.husky' ] && husky install || true && npm run install:all",
+    "install:all": "npm --prefix ./database install && npm --prefix ./backend install && npm --prefix ./frontend install",
     "start:database": "npm run --prefix ./database start",
     "start:backend": "npm run --prefix ./backend start",
     "start:frontend":"npm run --prefix ./frontend start"

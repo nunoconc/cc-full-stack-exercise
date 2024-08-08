@@ -1,46 +1,78 @@
-# Getting Started with Create React App
+# Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+React SPA web application to display the data obtained from the backend.
 
-## Available Scripts
+## Purpose
 
-In the project directory, you can run:
+Web application that presents companies security information.\
+Displays two different screens:
 
-### `npm start`
+-   List (/securities) or (/securities?page={n})
+-   Details (/securities/:symbol)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Setup
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+For this project will be necessary to install `npm` and `node`.\
+Before running first start from install command `npm install`.
 
-### `npm test`
+## Run
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Just run the global command `npm run start`.
 
-### `npm run build`
+## Commands
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+-   **precommit** - used to run has a precommit hook to validate lint
+-   **start** - starts the web application
+-   **lint** - lint validates the code
+-   **lint:fix** - lint and fix the code
+-   **prettier** - prettier validates the code
+-   **prettier:fix** - prettier validates and fix the code
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Structure
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Components
 
-### `npm run eject`
+React components that will display in the SPA application.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+-   **router** - routing component for the paths to each view
+-   **list** - list companies in a table
+-   **detail** - detail companies info and prices chart
+-   **error** - page error for global error cases
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Context
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Stores all the context components that take advantage of the hook `useContext`.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+-   **appContext** - global application context
+    -   in this case saves single instance of `securityService`
 
-## Learn More
+### Services
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Place where all the ncessary services are organized.\
+Single instances or possible helper functions that use external dependencies.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+-   **securityService** - requests the `backend` all the needed security data
+    -   uses axios to help with the http requests
+
+### Types
+
+Where you will find all the types, object, enums, etc.\
+Saved in different files per each domain case.
+
+-   **company** - type to be used to receive and present the company data
+-   **price** - inside company field to define price list
+    -   separated to enchance readability
+-   **enum** - price attribues names
+    -   used for the chart options to avoid repeated strings around
+
+## Libraries
+
+-   **react** - build the user interface
+-   **axios** - responsible for doing the http requests
+-   **mui** - styling library used to enchance the css
+-   **typescript** - enables types while using javascript
+-   **highcharts** - draws multiple types of charts and was used with the prices information
+-   **babel** - transcompiler for the javascript versions
+-   **eslint** - lints the code
+-   **prettier** - prettiers the code
+-   **lint-staged** - precommit hook usage (linters normally)
