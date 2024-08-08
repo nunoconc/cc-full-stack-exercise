@@ -44,6 +44,7 @@ async function create () {
           console.log(`Inserted ${result.rowCount} companies`);
         } finally {
           connection.release();
+          pool.end();
         }
       } catch (error) {
         console.log("Unable to complete data seed!");

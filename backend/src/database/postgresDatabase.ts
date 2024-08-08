@@ -3,10 +3,10 @@ import { Company } from '../models/company';
 
 export default class PostgresDatabase {
     pool = new Pool({
-        database: 'security-db',
-        user: 'postgres',
-        password: 'postgres',
-        port: 5432,
+        database: process.env.DATABASE_NAME,
+        user: process.env.DATABASE_USER,
+        password: process.env.DATABASE_PWD,
+        port: parseInt(process.env.DATABASE_PORT || '5432'),
         ssl: false,
         max: 20,
         idleTimeoutMillis: 1000,
