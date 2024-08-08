@@ -1,0 +1,83 @@
+name: 'Main Pipeline'
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types:
+      [
+        opened,
+        synchronize,
+        reopened,
+        ready_for_review,
+      ]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
+  cancel-in-progress: true
+
+jobs:
+  install:
+    name: Install and Cache
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/cache
+        id: cache-action
+        with:
+          packages: 'true'
+          modules: 'true'
+      - name: Install
+        if: steps.cache-action.outputs.cache-it != 'true'
+        shell: bash
+        run: |
+          npm install
+  code-format:
+    name: Code Format
+    runs-on: ubuntu-22.04
+    needs: [install]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/restore-cache
+        with:
+          packages: 'true'
+          modules: 'true'
+      - name: Validate Backend path
+        shell: bash
+        run: |
+          cd backend/node_modules
+          ls -l
+      - name: Linting Backend
+        shell: bash
+        run: npm run lint --prefix ./backend
+      - name: Prettier Backend
+        shell: bash
+        run: npm run prettier --prefix ./backend
+      - name: Validate Frontend path
+        shell: bash
+        run: |
+          cd frontend/node_modules
+          ls -l
+      - name: Linting Frontend
+        shell: bash
+        run: npm run lint --prefix ./frontend
+      - name: Prettier Frontend
+        shell: bash
+        run: npm run prettier --prefix ./frontend
+##  tests:
+##    name: Tests
+##    runs-on: ubuntu-22.04
+##    needs: [install]
+##    steps:
+##      - uses: actions/checkout@v4
+##      - uses: ./.github/actions/restore-cache
+##        with:
+##          packages: 'true'
+##          modules: 'true'
+##      - name: Test Backend
+##        shell: bash
+##        run: npm run test --prefix ./backend
+##      - name: Test Frontend
+##        shell: bash
+##        run: npm run tres --prefix ./frontend

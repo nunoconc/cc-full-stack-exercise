@@ -7,7 +7,7 @@
     "install:all": "npm --prefix ./database install && npm --prefix ./backend install && npm --prefix ./frontend install",
     "start:database": "npm run --prefix ./database start",
     "start:backend": "npm run --prefix ./backend start",
-    "start:frontend":"npm run --prefix ./frontend start"
+    "start:frontend": "npm run --prefix ./frontend start"
   },
   "repository": {
     "type": "git",
@@ -17,5 +17,8 @@
     "@commitlint/cli": "^18.6.0",
     "@commitlint/config-conventional": "^18.6.0",
     "husky": "^9.1.4"
+  },
+  "engines": {
+    "node": ">=18.3.0"
   }
 }

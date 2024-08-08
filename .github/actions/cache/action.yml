@@ -1,0 +1,36 @@
+name: Cache Action
+description: Caches node packages and modules
+
+inputs:
+  packages:
+    description: 'Flag to cache or not node setup packages'
+    default: 'false'
+  modules:
+    description: 'Flag to cache or not node install modules'
+    default: 'false'
+
+outputs:
+  cache-hit:
+    value: ${{ steps.cache-node-modules.outputs.cache-hit }}
+    description: Checks if the cache it's there or not
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Setup and node packages
+      if: ${{ inputs.packages }} == 'true'
+      uses: actions/setup-node@v4
+      with:
+        node-version-file: 'package.json'
+        cache: 'npm'
+        cache-dependency-path: 'package-lock.json'
+    - name: Cache
+      uses: actions/cache@v4
+      id: cache-node-modules
+      if: ${{ inputs.modules }} == 'true'
+      with:
+        key: node-modules-{{ hashFiles('package-lock.json') }}
+        path: |
+          ./node_modules/*
+          ./frontend/node_modules/*
+          ./backend/node_modules/*
