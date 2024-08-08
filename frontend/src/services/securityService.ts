@@ -14,10 +14,7 @@ export default class SecurityService {
 
     async getCompany(symbol: string): Promise<Company> {
         return this.axios
-            .get<Company>(`${this.apiEndpoint}/company/detail`, {
-                params: {
-                    symbol,
-                },
+            .get<Company>(`${this.apiEndpoint}/company/detail/${symbol}`, {
                 headers: {
                     'Content-Type': 'application/json',
                 },

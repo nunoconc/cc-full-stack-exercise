@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import morgan from 'morgan';
 import companyRoute from './routes/companyRoute';
 
+// set .env variables
 dotenv.config();
 
 const app = express();
@@ -46,6 +47,7 @@ app.use(function (
     res.status(err.status || 500);
 });
 
+// starts in the configured PORT
 app.listen(process.env.PORT, () => {
     console.log(`Server is running on port:${process.env.PORT}`);
 });
