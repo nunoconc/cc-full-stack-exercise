@@ -2,14 +2,9 @@ import createError from 'http-errors';
 import express, { NextFunction, Request, Response } from 'express';
 import dotenv from 'dotenv';
 import morgan from 'morgan';
-import PostgresDatabase from './database/postgresDatabase';
 import companyRoute from './routes/companyRoute';
 
 dotenv.config();
-
-// seed database with data.json
-const pgDB = new PostgresDatabase();
-pgDB.init();
 
 const app = express();
 
