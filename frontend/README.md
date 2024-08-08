@@ -34,7 +34,7 @@ Just run the global command `npm run start`.
 
 React components that will display in the SPA application.
 
--   **router** - routing component for the paths to each view
+-   **router** - routing component for the paths to each view and loaders to call the `securityService` single instance
 -   **list** - list companies in a table
 -   **detail** - detail companies info and prices chart
 -   **error** - page error for global error cases
