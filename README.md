@@ -50,7 +50,7 @@ See more inside [documentation](/frontend/README.md)
 
 # Improvements
 
-1. Develop the tests with the help of libaries like jest and cypress to have both unit tests and automated functional tests.
+1. Develop tests with help of libaries like jest and cypress to have both unit tests and automated functional tests.
 2. Complete pipeline with the tests validation and plus the deployment of each npm package, frontend and backend.\
    Making automated as possible the process since the change on the coden to, PR, review, ... pipeline and finally deploy.
 3. The backend could have hypermedia links that would enhance the returned data with links that possibilitate navigations or extra information requests.\

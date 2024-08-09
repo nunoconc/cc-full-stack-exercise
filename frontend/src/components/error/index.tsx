@@ -1,7 +1,6 @@
 import { JSX } from 'react';
 import { Typography } from '@mui/material';
 import { useRouteError } from 'react-router-dom';
-import './index.css';
 
 /**
  * Error component to show global error message

@@ -2,10 +2,9 @@ import { JSX, useEffect, useState, useRef } from 'react';
 import { useLoaderData } from 'react-router-dom';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
-import { Company, PriceEnum } from '../../types/company';
+import { Company } from '../../types/company';
 import { buildOptions } from './highchartOptions';
 import { Typography } from '@mui/material';
-import './index.css';
 
 /**
  * Detail component to show company details
@@ -27,20 +26,20 @@ export default function Detail(): JSX.Element {
 
     return (
         <div className="detailContainer">
-            <Typography variant="h4">
+            <Typography variant="h4" data-testid="detail-name">
                 <p>
                     {company?.ticker} - {company?.securityName}
                 </p>
             </Typography>
-            <Typography variant="h6">
+            <Typography variant="h6" data-testid="detail-sector">
                 <b>Sector:</b> {company?.sector}
             </Typography>
-            <Typography variant="h6">
+            <Typography variant="h6" data-testid="detail-country">
                 <b>Country: </b>
                 {company?.country}
             </Typography>
-            {company && (
-                <div>
+            {company?.prices && (
+                <div data-testid="detail-chart">
                     <HighchartsReact
                         highcharts={Highcharts}
                         options={buildOptions(company)}
